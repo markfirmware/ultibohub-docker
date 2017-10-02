@@ -1,0 +1,11 @@
+#
+# Raspberry Pi 2B specific config file
+#
+-CfVFPV3
+-CIARM
+-CaEABIHF
+-OoFASTMATH
+-Fu%INSTALLDIRECTORY%/units/armv7-ultibo/rtl
+-Fu%INSTALLDIRECTORY%/units/armv7-ultibo/packages
+-Fl%INSTALLDIRECTORY%/units/armv7-ultibo/lib
+-Fl%INSTALLDIRECTORY%/units/armv7-ultibo/lib/vc4

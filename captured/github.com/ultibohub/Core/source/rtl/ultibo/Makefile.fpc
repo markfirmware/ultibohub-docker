@@ -1,0 +1,731 @@
+#
+#   Makefile.fpc for Free Pascal Ultibo RTL
+#
+
+[package]
+main=rtl
+
+[target]
+units=$(SYSTEMUNIT) \
+       $(CPU_UNITS) \
+       uuchar \
+       objpas \
+       iso7185 \
+       extpas \
+       strings \
+       sysutils \
+       math \
+       classes \
+       fgl \
+       macpas \
+       typinfo \
+       types \
+       rtlconsts \
+       getopts \
+       lineinfo \
+       ctypes \
+       $(ULTIBO_UNITS) \
+       $(ULTIBO_CPU_UNITS) \
+       $(ULTIBO_DRIVER_UNITS) \
+       $(ULTIBO_KEYMAP_UNITS) \
+       $(ULTIBO_CODEPAGE_UNITS) \
+       dos \
+       charset \
+       cpall \
+       sysconst \
+       character \
+       fpwidestring \
+       $(ULTIBO_FONTS) \
+       $(ULTIBO_EXTRAS) \
+       $(ULTIBO_CPU_EXTRAS)
+
+implicitunits=exeinfo \
+              cp1250 \
+              cp1251 \
+              cp1252 \
+              cp1253 \
+              cp1254 \
+              cp1255 \
+              cp1256 \
+              cp1257 \
+              cp1258 \
+              cp437 \
+              cp646 \
+              cp850 \
+              cp856 \
+              cp866 \
+              cp874 \
+              cp8859_1 \
+              cp8859_5 \
+              cp8859_2 \
+              cp852 \
+              unicodenumtable \
+              unicodedata
+       
+[require]
+nortl=y
+
+[install]
+fpcpackage=y
+
+[default]
+fpcdir=../..
+target=ultibo
+
+[compiler]
+includedir=$(INC) $(PROCINC)
+sourcedir=$(INC) $(PROCINC) $(COMMON) $(ARCH)
+
+[prerules]
+RTL=..
+INC=$(RTL)/inc
+COMMON=$(RTL)/common
+PROCINC=$(RTL)/$(CPU_TARGET)
+UNITPREFIX=rtl
+SYSTEMUNIT=system
+override FPCOPT+=@rtl.cfg
+
+ifdef RELEASE
+override FPCOPT+=-Ur
+endif
+
+CPU_UNITS=
+SYSINIT_UNITS=
+
+ULTIBO_UNITS=globalconfig \
+             globalconst \
+             globaltypes \
+             globalstrings \
+             globalsock \
+             heapmanager \
+             platform \
+             locale \
+             unicode \
+             threads \
+             devices \
+             framebuffer \
+             dma \
+             font \
+             console \
+             logging \
+             serial \
+             uart \
+             i2c \
+             spi \
+             i2s \
+             pwm \
+             w1 \
+             rtc \
+             usb \
+             usbcdc \
+             mmc \
+             mmcspi \
+             bluetooth \
+             gpio \
+             wiring \
+             ahci \
+             ehci \
+             xhci \
+             dwcotg \
+             keymap \
+             keyboard \
+             mouse \
+             touch \
+             ps2 \
+             ataoe \
+             atapi \
+             scsi \
+             codec \
+             audio \
+             video \
+             mpeg \
+             dvb \
+             dab \
+             dfu \
+             tftframebuffer \
+             vc4v3d \
+             vc4vchiq \
+             gc880 \
+             gc2000 \
+             mali400 \
+             mali450 \
+             crypto \
+             ssl \
+             security \
+             authentication \
+             timezone \
+             ultibo \
+             ultiboutils \
+             ultiboclasses \
+             network \
+             loopback \
+             transport \
+             protocol \
+             arp \
+             ip \
+             ipv6 \
+             icmp \
+             icmpv6 \
+             raw \
+             udp \
+             tcp \
+             igmp \
+             dhcp \
+             dns \
+             vpn \
+             wifi \
+             smsc95xx \
+             sockets \
+             winsock \
+             winsock2 \
+             iphlpapi \
+             ftp \
+             http \
+             imap4 \
+             ldap \
+             pop3 \
+             smtp \
+             sip \
+             xmpp \
+             storage \
+             filesystem \
+             extfs \
+             fatfs \
+             cdfs \
+             ntfsconst \
+             ntfstypes \
+             ntfsutils \
+             ntfsclass \
+             ntfs \
+             virtualdisk \
+             iscsi \
+             nfs \
+             cifs \
+             services \
+             shell \
+             graphicsconsole \
+             syscalls \
+             vc4
+             
+ULTIBO_FONTS=Latin1_8x8 \
+             Latin1_8x10 \
+             Latin1_8x12 \
+             Latin1_8x14 \
+             Sun_12x22 \
+             Default8x9 \
+             Default8x16
+             
+ULTIBO_EXTRAS=ConsoleShell \
+              RemoteShell \
+              ShellFilesystem \
+              ShellUpdate \
+              WebStatus \
+              WiringI2C \
+              WiringSerial \
+              WiringSPI
+              
+ULTIBO_CPU_UNITS=
+ULTIBO_CPU_EXTRAS=
+
+ULTIBO_DRIVER_UNITS=rtlwifi \
+                    rtl8192cu \
+                    rtl8188eu \
+                    rt2x00lib \
+                    rt2800lib \
+                    rt2x00usb \
+                    rt2800usb \
+                    pl2303 \
+                    ftdiserial \
+                    usbcdcacm \
+                    pl011 \
+                    ds1307 \
+                    pl031 \
+                    mcp230xx \
+                    pl050 \
+                    hd44780 \
+                    af16x2lcd \
+                    ili9340 \
+                    hx8357d \
+                    pl110 \
+                    stmpe \
+                    rpift5406 \
+                    pitft28 \
+                    pitft35 \
+                    smc91x \
+                    pl18x \
+                    rpigpioexpander
+
+ULTIBO_KEYMAP_UNITS=keymap_us \
+                    keymap_uk \
+                    keymap_de \
+                    keymap_fr \
+                    keymap_es \
+                    keymap_us_intl
+
+ULTIBO_CODEPAGE_UNITS=cp720oem \
+                      cp737oem \
+                      cp775oem \
+                      cp850oem \
+                      cp852oem \
+                      cp857oem \
+                      cp862oem \
+                      cp866oem \
+                      cp874ansi \
+                      cp1250ansi \
+                      cp1251ansi \
+                      cp1253ansi \
+                      cp1254ansi \
+                      cp1255ansi \
+                      cp1256ansi \
+                      cp1257ansi \
+                      cp1258ansi
+
+ifeq ($(ARCH),arm)
+override ULTIBO_UNITS+=platformarm
+ifeq ($(SUBARCH),armv6)
+CPU_UNITS=
+CPU_UNITS_DEFINED=1
+override ULTIBO_UNITS+=bcm2835 \
+                       bcm2708 \
+                       platformarmv6 \
+                       platformrpi
+ULTIBO_CPU_UNITS=bootrpi
+ULTIBO_CPU_EXTRAS=RaspberryPi
+endif
+ifeq ($(SUBARCH),armv7a)
+CPU_UNITS=
+CPU_UNITS_DEFINED=1
+override ULTIBO_UNITS+=bcm2836 \
+                       bcm2837 \
+                       bcm2709 \
+                       bcm2710 \
+                       allwinnera20 \
+                       allwinnerh3 \
+                       freescaleimx6 \
+                       versatilepb \
+                       platformarmv7 \
+                       platformarmv8 \
+                       platformrpi2 \
+                       platformrpi3 \
+                       platformbpi \
+                       platformbpro \
+                       platformbbb \
+                       platformcuboxi \
+                       platformodroidc1 \
+                       platformodroidu3 \
+                       platformodroidxu3 \
+                       platformpcduino \
+                       platformqemuvpb
+ULTIBO_CPU_UNITS=bootrpi2 \
+                 bootrpi3 \
+                 bootbpi \
+                 bootbpro \
+                 bootbbb \
+                 bootcuboxi \
+                 bootodroidc1 \
+                 bootodroidu3 \
+                 bootodroidxu3 \
+                 bootpcduino \
+                 bootqemuvpb
+ULTIBO_CPU_EXTRAS=RaspberryPi2 \
+                  RaspberryPi3 \
+                  QEMUVersatilePB
+endif
+ifeq ($(CPU_UNITS_DEFINED),)
+$(error No CPUs enabled for given SUBARCH, pass either a SUBARCH or set CPU_UNITS_DEFINED=1 if you know what you are doing)
+endif
+endif
+
+ifeq ($(ARCH),mips)
+override ULTIBO_UNITS+=platformmips \
+                       platformmips32 \
+                       platformci20
+CPU_UNITS=
+CPU_UNITS_DEFINED=1
+ULTIBO_CPU_UNITS=bootci20
+ifeq ($(CPU_UNITS_DEFINED),)
+$(error No CPUs enabled for given SUBARCH, pass either a SUBARCH or set CPU_UNITS_DEFINED=1 if you know what you are doing)
+endif
+endif
+
+ifeq ($(ARCH),i386)
+override ULTIBO_UNITS+=platformx86 \
+                       platformpc
+CPU_UNITS=
+CPU_UNITS_DEFINED=1
+ULTIBO_CPU_UNITS=bootpcx86
+ifeq ($(CPU_UNITS_DEFINED),)
+$(error No CPUs enabled for given SUBARCH, pass either a SUBARCH or set CPU_UNITS_DEFINED=1 if you know what you are doing)
+endif
+endif
+
+ifeq ($(ARCH),x86_64)
+override ULTIBO_UNITS+=platformx86_64 \
+                       platformpc
+CPU_UNITS=
+CPU_UNITS_DEFINED=1
+ULTIBO_CPU_UNITS=bootpcx86_64
+ifeq ($(CPU_UNITS_DEFINED),)
+$(error No CPUs enabled for given SUBARCH, pass either a SUBARCH or set CPU_UNITS_DEFINED=1 if you know what you are doing)
+endif
+endif
+
+ifeq ($(ARCH),aarch64)
+override ULTIBO_UNITS+=platformaarch64
+ifeq ($(SUBARCH),armv8)
+CPU_UNITS=
+CPU_UNITS_DEFINED=1
+override ULTIBO_UNITS+=bcm2837 \
+                       bcm2710 \
+                       versatilepb \
+                       platformarmv8 \
+                       platformrpi3 \
+                       platformqemuvpb
+ULTIBO_CPU_UNITS=bootrpi3 \
+                 bootqemuvpb
+ULTIBO_CPU_EXTRAS=RaspberryPi3 \
+                  QEMUVersatilePB
+endif
+endif
+
+# Paths
+OBJPASDIR=$(RTL)/objpas
+GRAPHDIR=$(INC)/graph
+
+[rules]
+# .NOTPARALLEL:
+# Get the system independent include file names.
+# This will set the following variables :
+# SYSINCNAMES
+include $(INC)/makefile.inc
+SYSINCDEPS=$(addprefix $(INC)/,$(SYSINCNAMES))
+
+# Get the processor dependent include file names.
+# This will set the following variables :
+# CPUINCNAMES
+include $(PROCINC)/makefile.cpu
+SYSCPUDEPS=$(addprefix $(PROCINC)/,$(CPUINCNAMES))
+
+# Put system unit dependencies together.
+SYSDEPS=$(SYSINCDEPS) $(SYSCPUDEPS)
+
+#
+# Base Units (System, strings, os-dependent-base-unit)
+#
+
+$(SYSTEMUNIT)$(PPUEXT) : $(SYSTEMUNIT).pp $(SYSDEPS) $(INC)/softfpu.pp
+        $(COMPILER) -Us -Sg $(SYSTEMUNIT).pp $(REDIR)
+
+uuchar$(PPUEXT): $(INC)/uuchar.pp $(SYSTEMUNIT)$(PPUEXT)
+	$(COMPILER) $<
+
+objpas$(PPUEXT): $(OBJPASDIR)/objpas.pp $(INC)/except.inc $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) -I$(OBJPASDIR) $(OBJPASDIR)/objpas.pp $(REDIR)
+
+strings$(PPUEXT) : $(INC)/strings.pp $(INC)/stringsi.inc \
+                   $(PROCINC)/strings.inc $(PROCINC)/stringss.inc \
+                   $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) $<
+
+
+#
+# System Dependent Units
+#
+
+#ports$(PPUEXT) : ports.pas objpas$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+#        $(COMPILER) $<
+
+#doscalls$(PPUEXT) : doscalls.pas strings$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+#        $(COMPILER) $<
+
+
+#
+# TP7 Compatible RTL Units
+#
+
+dos$(PPUEXT) : dos.pp $(INC)/filerec.inc $(INC)/textrec.inc strings$(PPUEXT) \
+               $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) $<
+
+#crt$(PPUEXT) : crt.pas $(INC)/textrec.inc $(SYSTEMUNIT)$(PPUEXT)
+#        $(COMPILER) $<
+
+objects$(PPUEXT) : $(INC)/objects.pp dos$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) $<
+
+#printer$(PPUEXT) : printer.pas $(INC)/textrec.inc $(SYSTEMUNIT)$(PPUEXT)
+#        $(COMPILER) $<
+
+#graph$(PPUEXT) : graph.pp
+#        $(COMPILER) $<
+
+#
+# Delphi Compatible Units
+#
+
+sysutils$(PPUEXT) : sysutils.pp $(wildcard $(OBJPASDIR)/sysutils/*.inc) \
+                    objpas$(PPUEXT) sysconst$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) -Fi$(OBJPASDIR)/sysutils sysutils.pp
+
+classes$(PPUEXT) : classes.pp $(wildcard $(OBJPASDIR)/classes/*.inc) \
+                   sysutils$(PPUEXT) typinfo$(PPUEXT) rtlconsts$(PPUEXT) types$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) -Fi$(OBJPASDIR)/classes classes.pp
+
+typinfo$(PPUEXT): $(OBJPASDIR)/typinfo.pp objpas$(PPUEXT) sysutils$(PPUEXT) rtlconsts$(PPUEXT)
+        $(COMPILER) -Sg $(OBJPASDIR)/typinfo.pp $(REDIR)
+
+math$(PPUEXT): $(OBJPASDIR)/math.pp objpas$(PPUEXT) sysutils$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) $(OBJPASDIR)/math.pp $(REDIR)
+
+varutils$(PPUEXT) : $(OBJPASDIR)/cvarutil.inc $(OBJPASDIR)/varutils.inc \
+                    $(OBJPASDIR)/varutilh.inc varutils.pp $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) -I$(OBJPASDIR) varutils.pp $(REDIR)
+
+fmtbcd$(PPUEXT) : $(OBJPASDIR)/fmtbcd.pp objpas$(PPUEXT) sysutils$(PPUEXT) variants$(PPUEXT) classes$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) $(OBJPASDIR)/fmtbcd.pp
+
+types$(PPUEXT) : $(OBJPASDIR)/types.pp objpas$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) $(OBJPASDIR)/types.pp
+
+rtlconsts$(PPUEXT) : $(OBJPASDIR)/rtlconsts.pp $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) $(OBJPASDIR)/rtlconsts.pp
+
+sysconst$(PPUEXT) : $(OBJPASDIR)/sysconst.pp objpas$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) $(OBJPASDIR)/sysconst.pp
+
+fgl$(PPUEXT): $(OBJPASDIR)/fgl.pp objpas$(PPUEXT) types$(PPUEXT) system$(PPUEXT) sysutils$(PPUEXT)
+        $(COMPILER) -Sg $(OBJPASDIR)/fgl.pp $(REDIR)
+
+dateutil$(PPUEXT) : $(OBJPASDIR)/dateutil.pp $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) -I$(OBJPASDIR) $(OBJPASDIR)/dateutil.pp
+       
+# let it depend on buildcollations to prevent simultaneous building of unicodedata
+character$(PPUEXT): sysutils$(PPUEXT) $(OBJPASDIR)/character.pas objpas$(PPUEXT) rtlconsts$(PPUEXT)
+        $(COMPILER) $(OBJPASDIR)/character.pas
+        
+#
+# Mac Pascal Model
+#
+
+macpas$(PPUEXT) : $(INC)/macpas.pp objpas$(PPUEXT) math$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) $(INC)/macpas.pp $(REDIR)
+
+#
+# Other system-independent RTL Units
+#
+
+ucomplex$(PPUEXT): $(INC)/ucomplex.pp math$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+	$(COMPILER) $<
+
+getopts$(PPUEXT) : $(INC)/getopts.pp $(SYSTEMUNIT)$(PPUEXT)
+	$(COMPILER) $<
+
+heaptrc$(PPUEXT) : $(INC)/heaptrc.pp $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) -Sg $(INC)/heaptrc.pp $(REDIR)
+
+lineinfo$(PPUEXT) : $(INC)/lineinfo.pp strings$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+	$(COMPILER) $(INC)/lineinfo.pp
+
+charset$(PPUEXT) : $(INC)/charset.pp objpas$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+	$(COMPILER) $<
+
+#cp1251$(PPUEXT): $(RTL)/charmaps/cp1251.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp1251.pas
+
+#cp866$(PPUEXT): $(RTL)/charmaps/cp866.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp866.pas
+        
+#cp8859_5$(PPUEXT): $(RTL)/charmaps/cp8859_5.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp8859_5.pas
+
+#cp1253$(PPUEXT): $(RTL)/charmaps/cp1253.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp1253.pas
+
+#cp8859_1$(PPUEXT): $(RTL)/charmaps/cp8859_1.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp8859_1.pas
+
+#cp850$(PPUEXT): $(RTL)/charmaps/cp850.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp850.pas
+
+#cp437$(PPUEXT): $(RTL)/charmaps/cp437.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp437.pas
+
+#cp1252$(PPUEXT): $(RTL)/charmaps/cp1252.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp1252.pas
+
+#cp646$(PPUEXT): $(RTL)/charmaps/cp646.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp646.pas
+
+#cp874$(PPUEXT): $(RTL)/charmaps/cp874.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp874.pas
+
+#cp856$(PPUEXT): $(RTL)/charmaps/cp856.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp856.pas
+
+#cp1250$(PPUEXT): $(RTL)/charmaps/cp1250.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp1250.pas
+
+#cp1254$(PPUEXT): $(RTL)/charmaps/cp1254.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp1254.pas
+
+#cp1255$(PPUEXT): $(RTL)/charmaps/cp1255.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp1255.pas
+
+#cp1256$(PPUEXT): $(RTL)/charmaps/cp1256.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp1256.pas
+
+#cp1257$(PPUEXT): $(RTL)/charmaps/cp1257.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp1257.pas
+
+#cp1258$(PPUEXT): $(RTL)/charmaps/cp1258.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp1258.pas
+
+#cp852$(PPUEXT): $(RTL)/charmaps/cp852.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp852.pas
+
+#cp8859_2$(PPUEXT): $(RTL)/charmaps/cp8859_2.pas system$(PPUEXT) charset$(PPUEXT)
+#        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cp8859_2.pas
+    
+cpall$(PPUEXT): $(RTL)/charmaps/cpall.pas system$(PPUEXT) charset$(PPUEXT)
+        $(COMPILER) -Fu$(INC) -Fi$(RTL)/charmaps $(RTL)/charmaps/cpall.pas
+
+iso7185$(PPUEXT) : $(INC)/iso7185.pp $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) $(INC)/iso7185.pp
+
+extpas$(PPUEXT) : $(INC)/extpas.pp dos$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+        $(COMPILER) $(INC)/extpas.pp
+        
+fpwidestring$(PPUEXT): $(OBJPASDIR)/fpwidestring.pp character$(PPUEXT)
+        $(COMPILER) $(OBJPASDIR)/fpwidestring.pp
+        
+#
+# Unit specific rules
+#
+
+define CPU_UNITS_RULE
+$(1)$(PPUEXT): $(ARCH)/$(1).pp $(SYSTEMUNIT)$(PPUEXT)
+endef
+
+$(foreach unit,$(CPU_UNITS),$(eval $(call CPU_UNITS_RULE,$(unit))))
+
+$(addsuffix $(PPUEXT),$(CPU_UNITS)):
+	$(COMPILER) $<
+
+    
+#
+# Ultibo specific rules
+#
+
+define ULTIBO_UNITS_RULE
+$(1)$(PPUEXT): core/$(1).pas $(SYSTEMUNIT)$(PPUEXT)
+endef
+
+$(foreach unit,$(ULTIBO_UNITS),$(eval $(call ULTIBO_UNITS_RULE,$(unit))))
+
+$(addsuffix $(PPUEXT),$(ULTIBO_UNITS)):
+	$(COMPILER) $<
+
+define ULTIBO_FONTS_RULE
+$(1)$(PPUEXT): fonts/$(1).pas $(SYSTEMUNIT)$(PPUEXT)
+endef
+
+$(foreach unit,$(ULTIBO_FONTS),$(eval $(call ULTIBO_FONTS_RULE,$(unit))))
+
+$(addsuffix $(PPUEXT),$(ULTIBO_FONTS)):
+	$(COMPILER) $<
+
+define ULTIBO_EXTRAS_RULE
+$(1)$(PPUEXT): extra/$(1).pas $(SYSTEMUNIT)$(PPUEXT)
+endef
+
+$(foreach unit,$(ULTIBO_EXTRAS),$(eval $(call ULTIBO_EXTRAS_RULE,$(unit))))
+
+$(addsuffix $(PPUEXT),$(ULTIBO_EXTRAS)):
+	$(COMPILER) $<
+    
+#
+# Ultibo CPU specific rules
+#
+
+define ULTIBO_CPU_UNITS_RULE
+$(1)$(PPUEXT): core/$(1).pas $(SYSTEMUNIT)$(PPUEXT)
+endef
+
+$(foreach unit,$(ULTIBO_CPU_UNITS),$(eval $(call ULTIBO_CPU_UNITS_RULE,$(unit))))
+
+$(addsuffix $(PPUEXT),$(ULTIBO_CPU_UNITS)):
+	$(COMPILER) $<
+
+
+define ULTIBO_CPU_EXTRAS_RULE
+$(1)$(PPUEXT): extra/$(1).pas $(SYSTEMUNIT)$(PPUEXT)
+endef
+
+$(foreach unit,$(ULTIBO_CPU_EXTRAS),$(eval $(call ULTIBO_CPU_EXTRAS_RULE,$(unit))))
+
+$(addsuffix $(PPUEXT),$(ULTIBO_CPU_EXTRAS)):
+	$(COMPILER) $<
+
+#
+# Ultibo Driver specific rules
+#
+
+define ULTIBO_DRIVER_UNITS_RULE
+$(1)$(PPUEXT): drivers/$(1).pas $(SYSTEMUNIT)$(PPUEXT)
+endef
+
+$(foreach unit,$(ULTIBO_DRIVER_UNITS),$(eval $(call ULTIBO_DRIVER_UNITS_RULE,$(unit))))
+
+$(addsuffix $(PPUEXT),$(ULTIBO_DRIVER_UNITS)):
+	$(COMPILER) $<
+    
+#
+# Ultibo Keymap specific rules
+#
+
+define ULTIBO_KEYMAP_UNITS_RULE
+$(1)$(PPUEXT): keymaps/$(1).pas $(SYSTEMUNIT)$(PPUEXT)
+endef
+
+$(foreach unit,$(ULTIBO_KEYMAP_UNITS),$(eval $(call ULTIBO_KEYMAP_UNITS_RULE,$(unit))))
+
+$(addsuffix $(PPUEXT),$(ULTIBO_KEYMAP_UNITS)):
+	$(COMPILER) $<
+    
+#
+# Ultibo Code Page specific rules
+#
+
+define ULTIBO_CODEPAGE_UNITS_RULE
+$(1)$(PPUEXT): codepages/$(1).pas $(SYSTEMUNIT)$(PPUEXT)
+endef
+
+$(foreach unit,$(ULTIBO_CODEPAGE_UNITS),$(eval $(call ULTIBO_CODEPAGE_UNITS_RULE,$(unit))))
+
+$(addsuffix $(PPUEXT),$(ULTIBO_CODEPAGE_UNITS)):
+	$(COMPILER) $<
+    
+#
+# Other $(SYSTEMUNIT)-dependent RTL Units
+#
+
+#errors$(PPUEXT) : $(UNIXINC)/errors.pp strings$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+#	$(COMPILER) $(UNIXINC)/errors.pp
+
+#callspec$(PPUEXT) : $(INC)/callspec.pp $(SYSTEMUNIT)$(PPUEXT)
+#	$(COMPILER) $(INC)/callspec.pp
+
+#cmem$(PPUEXT) : $(INC)/cmem.pp $(SYSTEMUNIT)$(PPUEXT)
+#	$(COMPILER) $(INC)/cmem.pp
+
+#cthreads$(PPUEXT) : $(UNIXINC)/cthreads.pp $(SYSTEMUNIT)$(PPUEXT) unix$(PPUEXT) sysutils$(PPUEXT) baseunix$(PPUEXT) initc$(PPUEXT) dl$(PPUEXT)
+#	$(COMPILER) $(UNIXINC)/cthreads.pp
+
+#cwstring$(PPUEXT) : $(UNIXINC)/cwstring.pp $(SYSTEMUNIT)$(PPUEXT) sysutils$(PPUEXT) baseunix$(PPUEXT) unix$(PPUEXT) unixtype$(PPUEXT) ctypes$(PPUEXT) dynlibs$(PPUEXT) unixcp$(PPUEXT)
+#	$(COMPILER) $(UNIXINC)/cwstring.pp
+
+ctypes$(PPUEXT) :  $(INC)/ctypes.pp $(SYSTEMUNIT)$(PPUEXT)
+	$(COMPILER) $(INC)/ctypes.pp
+
+#fpcylix$(PPUEXT) : fpcylix.pp cthreads$(PPUEXT) cwstring$(PPUEXT) dynlibs$(PPUEXT) objpas$(PPUEXT) $(SYSTEMUNIT)$(PPUEXT)
+#	$(COMPILER) fpcylix.pp
